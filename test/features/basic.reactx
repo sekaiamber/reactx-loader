@@ -1,0 +1,19 @@
+<script>
+
+const React = require('react')
+
+class Index extends React.Component {
+  render() {
+    return (
+      <div id="workspace">hi</div>
+    )
+  }
+}
+
+</script>
+
+<style>
+  #workspace {
+    color: red;
+  }
+</style>
