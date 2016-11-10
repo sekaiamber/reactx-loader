@@ -1,6 +1,7 @@
 <script>
 
 const React = require('react')
+import {render} from 'react-dom'
 
 class Index extends React.Component {
   render() {
@@ -9,6 +10,8 @@ class Index extends React.Component {
     )
   }
 }
+
+render(<Index />, document.getElementById("main"));
 
 </script>
 
