@@ -1,22 +1,9 @@
-<script>
-
 const React = require('react')
-import {render} from 'react-dom'
 
-class Index extends React.Component {
+export default class Index extends React.Component {
   render() {
     return (
       <div id="workspace">hi</div>
     )
   }
 }
-
-render(<Index />, document.getElementById("main"));
-
-</script>
-
-<style>
-  #workspace {
-    color: red;
-  }
-</style>

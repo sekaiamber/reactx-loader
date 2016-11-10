@@ -95,7 +95,7 @@ function interopDefault (module) {
 describe('reactx-loader', function () {
   it('basic', function (done) {
     test({
-      entry: './test/fixtures/clean.reactx'
+      entry: './test/fixtures/basic.reactx'
     }, function (window, module, rawModule) {
       var $ = window.$;
       var document = window.document;
