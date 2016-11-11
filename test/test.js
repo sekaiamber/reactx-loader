@@ -39,6 +39,14 @@ var globalConfig = {
     react: "React",
     'react-dom': "ReactDOM",
     jquery: "$"
+  },
+  reactx: {
+    // loaders for each langs
+    loaders: {
+      js: 'babel'
+    },
+    // whether use 
+    sourceMap: true
   }
 }
 
