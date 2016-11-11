@@ -28,10 +28,11 @@
   "dependencies": {
     "consolidate": "^0.14.0",
     "hash-sum": "^1.0.2",
+    "htmlparser2": "^3.9.2",
     "js-beautify": "^1.6.3",
     "loader-utils": "^0.2.10",
     "lru-cache": "^4.0.1",
-    "object-assign": "^4.0.0",
+    "object-assign": "^4.1.0",
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6"
