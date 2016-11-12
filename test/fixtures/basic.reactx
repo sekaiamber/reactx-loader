@@ -10,11 +10,8 @@
   }
 </script>
 
-<style lang="sass">
-
-#workspace {
-  color: red;
-}
-
+<style>
+  #workspace {
+    color: red;
+  }
 </style>
-
