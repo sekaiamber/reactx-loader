@@ -14,7 +14,7 @@ var jsFiles = {
   reactDom: fs.readFileSync(path.resolve(__dirname, '../node_modules/react-dom/dist/react-dom.min.js'), "utf-8")
 }
 
-var loaderPath = 'expose?reactxModule!babel-loader!' + path.resolve(__dirname, '../')
+var loaderPath = 'expose?reactxModule!' + path.resolve(__dirname, '../')
 var mfs = new MemoryFS()
 // webpack config
 var globalConfig = {
@@ -92,6 +92,16 @@ function test (options, assert) {
   })
 }
 
+function testComponent (options, assert) {
+  test(options, function (window, module, rawModule) {
+    // render react component
+    var render = window.ReactDOM.render;
+    render(window.React.createElement(module, {}), document.getElementById("main"), function() {
+      assert(window, module, window.reactxModule)
+    })
+  })
+}
+
 // utils
 function interopDefault (module) {
   return module
@@ -102,31 +112,23 @@ function interopDefault (module) {
 
 describe('reactx-loader', function () {
   it('basic', function (done) {
-    test({
+    testComponent({
       entry: './test/fixtures/basic.reactx'
     }, function (window, module, rawModule) {
       var $ = window.$;
       var document = window.document;
       var $node = $('#main', window.document);
       expect($node.length).to.equal(1);
-      // render react component
-      var render = window.ReactDOM.render;
-      render(window.React.createElement(module, {}), document.getElementById("main"), function() {
-        var $workspace = $('#workspace', $node);
-        expect($workspace.length).to.equal(1);
-        done()
-      });
-      // var vnode = mockRender(module, {
-      //   msg: 'hi'
-      // })
-      // // <h2 class="red">{{msg}}</h2>
-      // expect(vnode.tag).to.equal('h2')
-      // expect(vnode.data.staticClass).to.equal('red')
-      // expect(vnode.children[0]).to.equal('hi')
-
-      // expect(module.data().msg).to.contain('Hello from Component A!')
-      // var style = window.document.querySelector('style').textContent
-      // expect(style).to.contain('comp-a h2 {\n  color: #f00;\n}')
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      // it seems like jsdom does not implement inheritance
+      // for getComputedStyle. So we have to check <style>
+      // tag directly
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect($style).to.contain('color: red');
+      done()
     })
   })
 });
