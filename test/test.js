@@ -45,7 +45,7 @@ var globalConfig = {
     loaders: {
       js: 'babel'
     },
-    // whether use 
+    // whether use source map
     sourceMap: true
   }
 }
