@@ -115,3 +115,6 @@ Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了r
 1. Support hot-reload of webpack-dev-server.
 2. Support scope style of component.
 3. Support PostCSS.
+4. Support Typescript.
+5. Support sourceMap.
+6. Support dependency injection.

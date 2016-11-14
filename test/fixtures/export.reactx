@@ -1,0 +1,17 @@
+<script>
+  const React = require('react')
+
+  export default class ExportComponent extends React.Component {
+    render() {
+      return (
+        <div id="export">hi</div>
+      )
+    }
+  }
+</script>
+
+<style>
+  #export {
+    color: red;
+  }
+</style>
