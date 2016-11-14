@@ -31,7 +31,7 @@ var globalConfig = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: "babel"
+        loader: "expose?reactxModule!babel"
       },
     ]
   },
@@ -43,7 +43,9 @@ var globalConfig = {
   reactx: {
     // loaders for each langs
     loaders: {
-      js: 'babel'
+      js: 'babel',
+      coffee: 'babel!coffee',
+      sass: 'style-loader!css-loader!sass'
     },
     // whether use source map
     sourceMap: true
@@ -124,6 +126,108 @@ describe('reactx-loader', function () {
       // it seems like jsdom does not implement inheritance
       // for getComputedStyle. So we have to check <style>
       // tag directly
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect($style).to.contain('color: red');
+      done()
+    })
+  })
+
+  it('es5', function (done) {
+    testComponent({
+      entry: './test/fixtures/es5.reactx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect($style).to.contain('color: red');
+      done()
+    })
+  })
+
+  it('export', function (done) {
+    testComponent({
+      entry: './test/fixtures/export.jsx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $export = $('#export', $workspace);
+      expect($export.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect($style).to.contain('color: red');
+      done()
+    })
+  })
+
+  it('import script', function (done) {
+    testComponent({
+      entry: './test/fixtures/import-script.reactx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      done()
+    })
+  })
+
+  it('import style', function (done) {
+    testComponent({
+      entry: './test/fixtures/import-style.reactx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect($style).to.contain('color: red');
+      done()
+    })
+  })
+
+  it('pre process of script', function (done) {
+    testComponent({
+      entry: './test/fixtures/preprocess-script.reactx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      done()
+    })
+  })
+
+  it('pre process of style', function (done) {
+    testComponent({
+      entry: './test/fixtures/preprocess-style.reactx'
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
       var $style = $('style', document);
       expect($style.length).to.equal(1);
       $style = $style.html();

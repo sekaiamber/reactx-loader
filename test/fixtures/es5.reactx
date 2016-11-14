@@ -1,0 +1,18 @@
+<script>
+  const React = require('react')
+
+  var Index = React.createClass({
+    render: function () {
+      return (
+        <div id="workspace">hi</div>
+      )
+    }
+  });
+  module.exports = Index;
+</script>
+
+<style>
+  #workspace {
+    color: red;
+  }
+</style>

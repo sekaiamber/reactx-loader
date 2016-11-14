@@ -1,0 +1,9 @@
+<script lang="coffee">
+  React = require 'react'
+
+  class Index extends React.Component
+    render: ->
+      `<div id="workspace">hi</div>`
+
+  module.exports = Index;
+</script>
