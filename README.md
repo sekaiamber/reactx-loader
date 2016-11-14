@@ -63,7 +63,27 @@ import Index from './component.reactx'
 ...
 ```
 
+## 使用其他JavaScript预处理语言
+
+这儿以Coffee为例，你可以在下面配置项中增加Coffee对应的loader来处理Coffee代码，因为coffee至今不支持jsx的html标签写法，所以就干脆用他的直接输出，但是这产生了问题，你必须在`coffee-loader`处理代码之后再让`babel`处理一次，所以我的建议是除非你用React的PureJS API来编程，不然在`coffee-loader`处理之后必须再处理一次将ES6代码编译为ES5。
+
+```html
+<script lang="coffee">
+  React = require 'react'
+
+  class Index extends React.Component
+    render: ->
+      `<div id="workspace">hi</div>`
+
+  module.exports = Index;
+</script>
+```
+
+关于我特别喜欢的Typescript，我研究了一会儿，暂时找不到解决方案，原因是什么呢，Typescript要求你的代码源文件扩展名必须为`.ts||.tsx||.js||.jsx||.d.ts`，所以造成了Typescript编译`.reactx`文件时会报错说找不到文件。我接下来会尝试看看有没有其他曲线救国的方案。
+
 ## 使用其他CSS预处理语言
+
+方式同上。
 
 ```html
 <style lang="sass">
@@ -72,6 +92,8 @@ import Index from './component.reactx'
   }
 </style>
 ```
+
+你可以像下面配置项中配置的`sass`的loader一样，将需要的PostCSS手动写入loader中，不久之后我会加入PostCSS系统支持。
 
 # 配置项
 
@@ -83,13 +105,19 @@ var config = {
     // 为指定语言指定loader
     loaders: {
       js: 'babel',
-      coffee: 'coffee-loader',
+      coffee: 'babel!coffee-loader',
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
     },
     // 是否使用source map
     sourceMap: true
   }
 }
+```
+
+# 测试
+
+```
+$ npm run test
 ```
 
 # 高亮及提示
@@ -118,3 +146,7 @@ Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了r
 4. Support Typescript.
 5. Support sourceMap.
 6. Support dependency injection.
+
+# License
+
+MIT
