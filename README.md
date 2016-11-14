@@ -14,12 +14,12 @@
 
 # 如何使用
 
-1. 使用npm安装依赖
+1.使用npm安装依赖
 
 ```bash
 $ npm install reactx-loader --save-dev
 ```
-2. 配置你的webpack
+2.配置你的webpack
 
 ```javascript
 // webpack.config.js
@@ -34,7 +34,7 @@ var config = {
 }
 ```
 
-3. 该干嘛干嘛
+3.该干嘛干嘛
 
 ```html
 // component.reactx
@@ -99,6 +99,7 @@ var config = {
 # Q&A
 **Q:** 这种写法有什么好处？  
 **A:** React提倡组件化的思想，为大型前端项目构建提供了可能。而一个前端组件势必包含`JS-CSS-HTML`这3元素，`JSX`很好地解决了`JS-HTML`的结合，然而实际编程中，样式也是必要的一部分，当前2种解决方案：
+
 1. require样式文件
 2. inline css
 
@@ -113,3 +114,4 @@ Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了r
 
 1. Support hot-reload of webpack-dev-server.
 2. Support scope style of component.
+3. Support PostCSS.
