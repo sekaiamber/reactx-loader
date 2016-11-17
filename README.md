@@ -3,23 +3,25 @@
 [![travis ci](https://travis-ci.org/sekaiamber/reactx-loader.svg)](https://travis-ci.org/sekaiamber/reactx-loader) [![npm package](https://img.shields.io/npm/v/reactx-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/reactx-loader)
 
 
-用来加载类似[vue单文件组件](http://cn.vuejs.org/v2/guide/single-file-components.html)格式的react单文件组件的webpack loader。
+This is a webpack loader for transforming react single file component like [vue component](http://cn.vuejs.org/v2/guide/single-file-components.html) format。
 
-# 功能
+[中文文档](https://github.com/sekaiamber/reactx-loader/blob/master/README.zh-cn.md)
 
-这个webpack loader允许你将react组件写成如下的格式：
+# Feature
+
+It allows you to write your components in this format:
 
 ![reactx component](https://raw.githubusercontent.com/sekaiamber/reactx-loader/master/doc/reactx-loader.jpg)
 
 
-# 如何使用
+# How to use
 
-1.使用npm安装依赖
+1.install from npm
 
 ```bash
 $ npm install reactx-loader --save-dev
 ```
-2.配置你的webpack
+2.config your webpack
 
 ```javascript
 // webpack.config.js
@@ -34,7 +36,7 @@ var config = {
 }
 ```
 
-3.该干嘛干嘛
+3.do whatever you want
 
 ```html
 // component.reactx
@@ -63,9 +65,9 @@ import Index from './component.reactx'
 ...
 ```
 
-## 使用其他JavaScript预处理语言
+## Use other languages that compile to JS 
 
-这儿以Coffee为例，你可以在下面配置项中增加Coffee对应的loader来处理Coffee代码，因为coffee至今不支持jsx的html标签写法，所以就干脆用他的直接输出，但是这产生了问题，你必须在`coffee-loader`处理代码之后再让`babel`处理一次，所以我的建议是除非你用React的PureJS API来编程，不然在`coffee-loader`处理之后必须再处理一次将ES6代码编译为ES5。
+Here we use Coffee as an example, you can modify the config of webpack(which we will mention in next part) to tell reactx-loader which loader it can use to process each languages. Because Coffee don't support JSX's HTML tag, so we use Coffee's embedded feature. But here we meet a problem, when using embedded Js of Coffee to export JSX's HTML tag, you should using `babel-loader` to process export code after `coffee-loader`'s processing. So my advice: unless you use react pure js api in your program, you shall use `babel-loader` after `coffee-loader`
 
 ```html
 <script lang="coffee">
@@ -79,11 +81,12 @@ import Index from './component.reactx'
 </script>
 ```
 
-关于我特别喜欢的Typescript，我研究了一会儿，暂时找不到解决方案，原因是什么呢，Typescript要求你的代码源文件扩展名必须为`.ts||.tsx||.js||.jsx||.d.ts`，所以造成了Typescript编译`.reactx`文件时会报错说找不到文件。我接下来会尝试看看有没有其他曲线救国的方案。
+And for my favorite Typescript, I have tried for a while, but I can't find a solution. Because Typescript need your files extensions in `.ts||.tsx||.js||.jsx||.d.ts`, so when it compile `reactx` file, some error will throw out. But I'll still try to search for other solutions :)
 
-## 使用其他CSS预处理语言
 
-方式同上。
+## Use Pre-Processors of CSS
+
+The same way of previous part.
 
 ```html
 <style lang="sass">
@@ -93,50 +96,50 @@ import Index from './component.reactx'
 </style>
 ```
 
-你可以像下面配置项中配置的`sass`的loader一样，将需要的PostCSS手动写入loader中，不久之后我会加入PostCSS系统支持。
+You can modify the `sass` loader of reactx config like next part. You can add PostCSS loader(autoprefixer etc.) in config. But I'll still add PostCSS system in the future version.
 
-# 配置项
+# Configuration
 
-在webpack的配置中可以添加`reactx`的项：
+You can add `reactx` in your webpack config:
 
 ```javascript
 var config = {
   reactx: {
-    // 为指定语言指定loader
+    // loaders for each languages
     loaders: {
       js: 'babel',
       coffee: 'babel!coffee-loader',
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
     },
-    // 是否使用source map
+    // whethar use source map
     sourceMap: true
   }
 }
 ```
 
-# 测试
+# Test
 
 ```
 $ npm run test
 ```
 
-# 高亮及提示
+# Highlight and Linting
 
-若你的编辑器没有使用任何配置，可以直接使用`html`为`reactx`文件高亮。因为当前这个库的语法接近VUE单文件组件，所以你可以使用`vue component(*.vue)`来高亮。
+You can use `html` highlight for `reactx` or just use `vue component` :)
 
 # Q&A
-**Q:** 这种写法有什么好处？  
-**A:** React提倡组件化的思想，为大型前端项目构建提供了可能。而一个前端组件势必包含`JS-CSS-HTML`这3元素，`JSX`很好地解决了`JS-HTML`的结合，然而实际编程中，样式也是必要的一部分，当前2种解决方案：
+**Q:** What's the benefit of this format？  
+**A:** A JS component must need 3 parts: `JS-CSS-HTML`, and `JSX` combines `JS-HTML` effectively, but when we need to combine styles to the `JSX` component, usually in 2 ways:
 
-1. require样式文件
+1. require style file
 2. inline css
 
-前者使得项目文件越来越多，眼花缭乱，通过命名约定也许缓解一部分这些痛苦，但还是有点难受。而后者更有种饮鸩止渴的感觉，我个人不太喜欢inline样式，不然外部样式将大量充斥`!important`，毕竟组件还是需要扩展的，太封闭也不好。
+The first solution will make project file structure more complex. And the secend one will make the component unable to change style, you may need a lot of `!important` in your stylesheets.
 
-Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了react上。
+So single file solution is a better way to manage your project files, and make it easy to extend.
 
-**Q:** 为何每个组件只有一个`script`而可以有多个`style`?  
-**A:** 因为我们无法有效判断多个`script`各自的`export`。
+**Q:** Why each component just have one `script` tag but can have many `style` tags?
+**A:** Because we can't determine the `export` of each `script` part easily.
 
 # Next
 
