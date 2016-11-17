@@ -67,7 +67,7 @@ import Index from './component.reactx'
 
 ## Use other languages that compile to JS 
 
-Here we use Coffee as an example, you can modify the config of webpack(which we will mention in next part) to tell reactx-loader which loader it can use to process each languages. Because Coffee don't support JSX's HTML tag, so we use Coffee's embedded feature. But here we meet a problem, when using embedded Js of Coffee to export JSX's HTML tag, you should using `babel-loader` to process export code after `coffee-loader`'s processing. So my advice: unless you use react pure js api in your program, you shall use `babel-loader` after `coffee-loader`
+Here we use Coffee as an example, you can modify the config of webpack(which we will mention in next part) to tell reactx-loader which loader it can use to process each languages. Because Coffee don't support JSX's HTML tag, so we use Coffee's embedded feature. But here we meet a problem, when using embedded Js of Coffee to export JSX's HTML tag, you should using `babel-loader` to process export code after `coffee-loader`'s processing. So my advice: unless you use react pure js api in your program, you shall use `babel-loader` after `coffee-loader`.
 
 ```html
 <script lang="coffee">
@@ -138,7 +138,7 @@ The first solution will make project file structure more complex. And the secend
 
 So single file solution is a better way to manage your project files, and make it easy to extend.
 
-**Q:** Why each component just have one `script` tag but can have many `style` tags?
+**Q:** Why each component just have one `script` tag but can have many `style` tags?  
 **A:** Because we can't determine the `export` of each `script` part easily.
 
 # Next
