@@ -110,9 +110,7 @@ var config = {
       js: 'babel',
       coffee: 'babel!coffee-loader',
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
-    },
-    // whethar use source map
-    sourceMap: true
+    }
   }
 }
 ```
@@ -143,11 +141,11 @@ So single file solution is a better way to manage your project files, and make i
 
 # Next
 
-1. Support hot-reload of webpack-dev-server.
+1. ~~Support hot-reload of webpack-dev-server.~~
 2. Support scope style of component.
 3. Support PostCSS.
 4. Support Typescript.
-5. Support sourceMap.
+5. ~~Support sourceMap.~~
 6. Support dependency injection.
 
 # License

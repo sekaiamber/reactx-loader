@@ -46,9 +46,7 @@ var globalConfig = {
       js: 'babel',
       coffee: 'babel!coffee',
       sass: 'style-loader!css-loader!sass'
-    },
-    // whether use source map
-    sourceMap: true
+    }
   }
 }
 
@@ -68,9 +66,9 @@ function bundle (options, cb) {
   })
 }
 
-function log(msg) {
+function log() {
   console.log('------------------------')
-  console.log(msg)
+  console.log.apply(console, arguments)
   console.log('------------------------')
 }
 
