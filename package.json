@@ -1,7 +1,7 @@
 {
   "name": "reactx-loader",
-  "version": "0.0.2",
-  "description": "React single file component like vue.js component.",
+  "version": "0.0.3",
+  "description": "React single file component. Write JS-CSS-HTML in single file.",
   "main": "index.js",
   "repository": {
     "type": "git",
