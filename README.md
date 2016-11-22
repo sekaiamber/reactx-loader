@@ -101,7 +101,7 @@ You can modify the `sass` loader of reactx config like next part. You can add Po
 
 ## Scoped CSS
 
-`reactx-loader`support scoped CSS, we use [webpack css loader's **Local scope** feature and syntax](https://github.com/webpack/css-loader#local-scope), you can get each `<style>` tag's export via `reactx` object:
+`reactx-loader`support scoped CSS, we use [webpack css loader's **Local scope** feature and syntax](https://github.com/webpack/css-loader#local-scope), you can get each `<style>` tag's export via `reactx` object(or alias you set in the config):
 
 ```html
 <script>
@@ -149,7 +149,9 @@ var config = {
       js: 'babel',
       coffee: 'babel!coffee-loader',
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
-    }
+    },
+    // alias of `reactx` object
+    alias: 'myreactx'
   }
 }
 ```
