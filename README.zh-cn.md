@@ -95,6 +95,32 @@ import Index from './component.reactx'
 
 你可以像下面配置项中配置的`sass`的loader一样，将需要的PostCSS手动写入loader中，不久之后我会加入PostCSS系统支持。
 
+## Scoped CSS
+
+`reactx-loader`支持Scoped CSS，我们使用[webpack css loader的Local scope功能和语法](https://github.com/webpack/css-loader#local-scope)，你可以在`<script>`标签中访问`reactx`对象来获得相应的`<style>`标签的引用。
+
+```html
+<script>
+  const React = require('react')
+
+  export default class Index extends React.Component {
+    render() {
+      return (
+        <div id="workspace" className={reactx.style.scopedClassName}>hi</div>
+      )
+    }
+  }
+</script>
+
+<style>
+  #workspace:local(.scopedClassName){
+    color: red;
+  }
+</style>
+```
+
+若一个组件中包含多个`<style>`标签，那么你可以使用`reactx.styles[n]`来访问每个标签的引用。
+
 # 配置项
 
 在webpack的配置中可以添加`reactx`的项：
@@ -141,7 +167,7 @@ Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了r
 # Next
 
 1. ~~Support hot-reload of webpack-dev-server.~~
-2. Support scope style of component.
+2. ~~Support scope style of component.~~
 3. Support PostCSS.
 4. Support Typescript.
 5. ~~Support sourceMap.~~
