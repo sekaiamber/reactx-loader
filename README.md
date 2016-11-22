@@ -98,6 +98,45 @@ The same way of previous part.
 
 You can modify the `sass` loader of reactx config like next part. You can add PostCSS loader(autoprefixer etc.) in config. But I'll still add PostCSS system in the future version.
 
+
+## Scoped CSS
+
+`reactx-loader`support scoped CSS, we use [webpack css loader's **Local scope** feature and syntax](https://github.com/webpack/css-loader#local-scope), you can get each `<style>` tag's export via `reactx` object:
+
+```html
+<script>
+  const React = require('react')
+
+  export default class Index extends React.Component {
+    render() {
+      return (
+        <div id="workspace" className={reactx.style.scopedClassName}>hi</div>
+      )
+    }
+  }
+</script>
+
+<style>
+  #workspace:local(.scopedClassName){
+    color: red;
+  }
+</style>
+```
+
+is transformed to
+
+```html
+<div id="workspace" class="_3WESzpK5lIiEqK-okbQCNB">hi</div>
+```
+
+```css
+#workspace._3WESzpK5lIiEqK-okbQCNB{
+  color: red;
+}
+```
+
+If there are more than one `<style>` in your component, you can use `reactx.styles[n]` to get each tag's export.
+
 # Configuration
 
 You can add `reactx` in your webpack config:
@@ -142,7 +181,7 @@ So single file solution is a better way to manage your project files, and make i
 # Next
 
 1. ~~Support hot-reload of webpack-dev-server.~~
-2. Support scope style of component.
+2. ~~Support scope style of component.~~
 3. Support PostCSS.
 4. Support Typescript.
 5. ~~Support sourceMap.~~

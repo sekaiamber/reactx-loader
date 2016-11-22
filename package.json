@@ -1,6 +1,6 @@
 {
   "name": "reactx-loader",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React single file component. Write JS-CSS-HTML in single file.",
   "main": "index.js",
   "repository": {
