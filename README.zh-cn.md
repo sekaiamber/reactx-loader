@@ -97,7 +97,7 @@ import Index from './component.reactx'
 
 ## Scoped CSS
 
-`reactx-loader`支持Scoped CSS，我们使用[webpack css loader的Local scope功能和语法](https://github.com/webpack/css-loader#local-scope)，你可以在`<script>`标签中访问`reactx`对象来获得相应的`<style>`标签的引用。
+`reactx-loader`支持Scoped CSS，我们使用[webpack css loader的Local scope功能和语法](https://github.com/webpack/css-loader#local-scope)，你可以在`<script>`标签中访问`reactx`对象（或者配置项中的alias）来获得相应的`<style>`标签的引用。
 
 ```html
 <script>
@@ -146,8 +146,8 @@ var config = {
       coffee: 'babel!coffee-loader',
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
     },
-    // 是否使用source map
-    sourceMap: true
+    // `reactx`对象的别名
+    alias: 'myreactx'
   }
 }
 ```

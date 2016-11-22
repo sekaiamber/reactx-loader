@@ -244,13 +244,31 @@ describe('reactx-loader', function () {
       expect($node.length).to.equal(1);
       var $workspace = $('#workspace', $node);
       expect($workspace.length).to.equal(1);
-      // it seems like jsdom does not implement inheritance
-      // for getComputedStyle. So we have to check <style>
-      // tag directly
       var $style = $('style', document);
       expect($style.length).to.equal(1);
       $style = $style.html();
-      console.log($style)
+      expect($style).to.contain('color: red');
+      expect($style).to.contain($workspace.attr('class'));
+      done()
+    })
+  })
+
+  it('alias', function (done) {
+    testComponent({
+      entry: './test/fixtures/alias.reactx',
+      reactx: {
+        alias: 'myreactx'
+      }
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
       expect($style).to.contain('color: red');
       expect($style).to.contain($workspace.attr('class'));
       done()

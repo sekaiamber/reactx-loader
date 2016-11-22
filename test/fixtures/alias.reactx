@@ -1,0 +1,17 @@
+<script>
+  const React = require('react')
+
+  export default class Index extends React.Component {
+    render() {
+      return (
+        <div id="workspace" className={myreactx.style.scope}>hi</div>
+      )
+    }
+  }
+</script>
+
+<style>
+  #workspace:local(.scope){
+    color: red;
+  }
+</style>
