@@ -123,6 +123,18 @@ You can modify the `sass` loader of reactx config like next part. You can add Po
 </style>
 ```
 
+is transformed to
+
+```html
+<div id="workspace" class="_3WESzpK5lIiEqK-okbQCNB">hi</div>
+```
+
+```css
+#workspace._3WESzpK5lIiEqK-okbQCNB{
+  color: red;
+}
+```
+
 If there are more than one `<style>` in your component, you can use `reactx.styles[n]` to get each tag's export.
 
 # Configuration

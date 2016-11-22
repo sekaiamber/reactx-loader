@@ -250,6 +250,7 @@ describe('reactx-loader', function () {
       var $style = $('style', document);
       expect($style.length).to.equal(1);
       $style = $style.html();
+      console.log($style)
       expect($style).to.contain('color: red');
       expect($style).to.contain($workspace.attr('class'));
       done()

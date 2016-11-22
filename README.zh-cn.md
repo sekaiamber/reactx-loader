@@ -119,6 +119,18 @@ import Index from './component.reactx'
 </style>
 ```
 
+上述代码将被转义为：
+
+```html
+<div id="workspace" class="_3WESzpK5lIiEqK-okbQCNB">hi</div>
+```
+
+```css
+#workspace._3WESzpK5lIiEqK-okbQCNB{
+  color: red;
+}
+```
+
 若一个组件中包含多个`<style>`标签，那么你可以使用`reactx.styles[n]`来访问每个标签的引用。
 
 # 配置项
