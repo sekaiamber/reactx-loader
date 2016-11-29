@@ -98,7 +98,7 @@ import Index from './component.reactx'
 </style>
 ```
 
-你可以像下面配置项中配置的`sass`的loader一样，将需要的PostCSS手动写入loader中，不久之后我会加入PostCSS系统支持。
+你可以像下面配置项中配置的`sass`的loader一样，将需要的PostCSS手动写入loader中，或者使用PostCSS功能。
 
 ## Scoped CSS
 

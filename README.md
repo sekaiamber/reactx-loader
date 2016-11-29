@@ -102,7 +102,7 @@ The same way of previous part.
 </style>
 ```
 
-You can modify the `sass` loader of reactx config like next part. You can add PostCSS loader(autoprefixer etc.) in config. But I'll still add PostCSS system in the future version.
+You can modify the `sass` loader of reactx config like next part. You can add PostCSS loader(autoprefixer etc.) in config, or you can use PostCSS feature.
 
 
 ## Scoped CSS
