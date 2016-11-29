@@ -3,7 +3,7 @@
 [![travis ci](https://travis-ci.org/sekaiamber/reactx-loader.svg)](https://travis-ci.org/sekaiamber/reactx-loader) [![npm package](https://img.shields.io/npm/v/reactx-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/reactx-loader)
 
 
-This is a webpack loader for transforming react single file component like [vue component](http://cn.vuejs.org/v2/guide/single-file-components.html) format。
+This is a webpack loader for transforming react single file component.
 
 [中文文档](https://github.com/sekaiamber/reactx-loader/blob/master/README.zh-cn.md)
 

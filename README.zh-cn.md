@@ -3,7 +3,7 @@
 [![travis ci](https://travis-ci.org/sekaiamber/reactx-loader.svg)](https://travis-ci.org/sekaiamber/reactx-loader) [![npm package](https://img.shields.io/npm/v/reactx-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/reactx-loader)
 
 
-用来加载类似[vue单文件组件](http://cn.vuejs.org/v2/guide/single-file-components.html)格式的react单文件组件的webpack loader。
+用来加载react单文件组件的webpack loader。
 
 # 功能
 
