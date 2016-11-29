@@ -274,4 +274,53 @@ describe('reactx-loader', function () {
       done()
     })
   })
+
+  it('postcss plugin', function (done) {
+    testComponent({
+      entry: './test/fixtures/postcss-plugin.reactx',
+      reactx: {
+        // PostCSS options
+        postcss: [require('autoprefixer')({ browsers: ["last 2 version", "> 1%"] })]
+      }
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect(Math.max($style.indexOf('-ms-'), $style.indexOf('-webkit-'))).to.not.equal(-1);
+      done()
+    })
+  })
+
+  it('postcss parser', function (done) {
+    testComponent({
+      entry: './test/fixtures/postcss-parser.reactx',
+      reactx: {
+        // PostCSS options
+        postcss: {
+          plugins: [require('autoprefixer')({ browsers: ["last 2 version", "> 1%"] })], // list of plugins
+          options: {
+            parser: require('sugarss') // use sugarss parser
+          }
+        }
+      }
+    }, function (window, module, rawModule) {
+      var $ = window.$;
+      var document = window.document;
+      var $node = $('#main', window.document);
+      expect($node.length).to.equal(1);
+      var $workspace = $('#workspace', $node);
+      expect($workspace.length).to.equal(1);
+      var $style = $('style', document);
+      expect($style.length).to.equal(1);
+      $style = $style.html();
+      expect(Math.max($style.indexOf('-ms-'), $style.indexOf('-webkit-'))).to.not.equal(-1);
+      done()
+    })
+  })
 });

@@ -3,7 +3,7 @@
 [![travis ci](https://travis-ci.org/sekaiamber/reactx-loader.svg)](https://travis-ci.org/sekaiamber/reactx-loader) [![npm package](https://img.shields.io/npm/v/reactx-loader.svg?maxAge=2592000)](https://www.npmjs.com/package/reactx-loader)
 
 
-用来加载类似[vue单文件组件](http://cn.vuejs.org/v2/guide/single-file-components.html)格式的react单文件组件的webpack loader。
+用来加载react单文件组件的webpack loader。
 
 # 功能
 
@@ -11,6 +11,11 @@
 
 ![reactx component](https://raw.githubusercontent.com/sekaiamber/reactx-loader/master/doc/reactx-loader.jpg)
 
+`reactx-loader`也支持如下功能：
+
+* 支持开发模式下的热加载
+* 支持[webpack css loader的**Local Scope**功能和语法](https://github.com/webpack/css-loader#local-scope)。
+* 支持使用其他Webpack loader来加载React组件的各个部分，比如使用SASS来加载`<style>`标签，或者使用CoffeeScript来编译`<script>`标签（如果你坚持这么做。。）
 
 # 如何使用
 
@@ -133,6 +138,25 @@ import Index from './component.reactx'
 
 若一个组件中包含多个`<style>`标签，那么你可以使用`reactx.styles[n]`来访问每个标签的引用。
 
+## PostCSS
+
+`reactx-loader`支持[PostCSS](https://github.com/postcss/postcss)，你可以在Webpack的`reactx`配置中增加`postcss`项（下一部分有示例）。
+
+`postcss`配置项接受下列输入：
+
+* 一个plugin数组
+* 一个返回plugin数组的函数
+* 一个包含各个PostCSS配置项的对象，这个对象将传递给`reactx`的PostCSS处理器。这个方式经常用在要使用PostCSS预处理parser的情况下（比如SugarSS之类的）
+
+```javascript
+postcss: {
+  plugins: [...], // list of plugins
+  options: {
+    parser: sugarss // use sugarss parser
+  }
+}
+```
+
 # 配置项
 
 在webpack的配置中可以添加`reactx`的项：
@@ -147,7 +171,14 @@ var config = {
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
     },
     // `reactx`对象的别名
-    alias: 'myreactx'
+    alias: 'myreactx',
+    // PostCSS配置项
+    postcss: {
+      plugins: [require('autoprefixer')({ browsers: ["last 2 version", "> 1%"] })], // plugin数组
+      options: {
+        parser: require('sugarss') // 使用SugarSS
+      }
+    }
   }
 }
 ```
@@ -180,7 +211,7 @@ Vue的单文件组件格式很好地结合了`JS-CSS-HTML`，所以就移到了r
 
 1. ~~Support hot-reload of webpack-dev-server.~~
 2. ~~Support scope style of component.~~
-3. Support PostCSS.
+3. ~~Support PostCSS.~~
 4. Support Typescript.
 5. ~~Support sourceMap.~~
 6. Support dependency injection.
