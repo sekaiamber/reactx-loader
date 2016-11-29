@@ -1,6 +1,6 @@
 {
   "name": "reactx-loader",
-  "version": "0.0.5",
+  "version": "1.0.5",
   "description": "React single file component. Write JS-CSS-HTML in single file.",
   "main": "index.js",
   "repository": {
@@ -41,6 +41,7 @@
     "css-loader": "*"
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.3",
     "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",

@@ -13,6 +13,12 @@ It allows you to write your components in this format:
 
 ![reactx component](https://raw.githubusercontent.com/sekaiamber/reactx-loader/master/doc/reactx-loader.jpg)
 
+`reactx-loader` also provide following features:
+
+* Supports component hot-reloading during development.
+* Supports [webpack css loader's **Local Scope** feature and syntax](https://github.com/webpack/css-loader#local-scope).
+* Allows using other Webpack loaders for each part of a React component, for example SASS for `<style>` and CoffeeScript for `<script>`(if you like).
+
 
 # How to use
 
@@ -101,7 +107,7 @@ You can modify the `sass` loader of reactx config like next part. You can add Po
 
 ## Scoped CSS
 
-`reactx-loader`support scoped CSS, we use [webpack css loader's **Local scope** feature and syntax](https://github.com/webpack/css-loader#local-scope), you can get each `<style>` tag's export via `reactx` object(or alias you set in the config):
+`reactx-loader` support scoped CSS, we use [webpack css loader's **Local scope** feature and syntax](https://github.com/webpack/css-loader#local-scope), you can get each `<style>` tag's export via `reactx` object(or alias you set in the config):
 
 ```html
 <script>
@@ -137,6 +143,25 @@ is transformed to
 
 If there are more than one `<style>` in your component, you can use `reactx.styles[n]` to get each tag's export.
 
+## PostCSS
+
+`reactx-loader` support [PostCSS](https://github.com/postcss/postcss), you can just add `postcss` option to the `reactx` webpack config(show in next part).
+
+The `postcss` option accepts:
+
+* An array of plugins;
+* A function that returns an array of plugins;
+* An object that contains options to be passed to the PostCSS processor. This is useful when you are using PostCSS projects that relies on custom parser/stringifiers:
+
+```javascript
+postcss: {
+  plugins: [...], // list of plugins
+  options: {
+    parser: sugarss // use sugarss parser
+  }
+}
+```
+
 # Configuration
 
 You can add `reactx` in your webpack config:
@@ -151,7 +176,14 @@ var config = {
       sass: 'style-loader!css-loader!autoprefixer?{browsers:["last 2 version", "> 1%"]}!sass'
     },
     // alias of `reactx` object
-    alias: 'myreactx'
+    alias: 'myreactx',
+    // PostCSS options
+    postcss: {
+      plugins: [require('autoprefixer')({ browsers: ["last 2 version", "> 1%"] })], // list of plugins
+      options: {
+        parser: require('sugarss') // use sugarss parser
+      }
+    }
   }
 }
 ```
@@ -184,7 +216,7 @@ So single file solution is a better way to manage your project files, and make i
 
 1. ~~Support hot-reload of webpack-dev-server.~~
 2. ~~Support scope style of component.~~
-3. Support PostCSS.
+3. ~~Support PostCSS.~~
 4. Support Typescript.
 5. ~~Support sourceMap.~~
 6. Support dependency injection.
